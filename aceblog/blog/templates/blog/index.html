@@ -17,10 +17,15 @@
             <div
                 class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="about.html">messages</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="contact.html">{% user %}</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="post.html">Blog Post</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'blog-home' %}">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'blog-home' %}">messages</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'profile' %}"">{{ user }}</a></li>
+                {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'blog-home' %}">Register</a></li>
                 </ul>
         </div>
         </div>
