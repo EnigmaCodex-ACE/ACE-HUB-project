@@ -1,14 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import Post,Comment
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView,FormView
+from users.models import Profile
 
 def home(request):
     context = {
         'posts': Post.objects.all() ,
-        'title':"ACE Students"
+        'title':"ACE Students",
+        'user':User.objects.all()
     }
     return render(request,'blog/home.html',context)
 
@@ -52,6 +54,18 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
             return True
         return False
 
+
+class UserPostListView(ListView):
+    model = Profile
+    template_name = 'blog/user_profile.html'
+    allow_empty = False  #this will show 404 if the username does not exists
+
+    def get(self,request,*args, **kwargs):
+        username = self.kwargs['username']
+        user_profile = User.objects.get(username=username)
+        return render(request,'blog/user_profile.html',{'user_profile':user_profile,
+                                                        'name':username})
+    
 
 def about(request):
     return render(request,'blog/about.html',{'title':"An About Page"})

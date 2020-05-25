@@ -11,7 +11,7 @@ class Profile(models.Model):
     bio = models.TextField(default=random.choice(random_bios))
 
     def __str__(self):
-        return f'{self.user} Profile'
+        return f'{self.user}'
 
 class CollegeDataBase(models.Model):
     rollno = models.CharField(max_length=10,default="1XAG1A0XXX")
