@@ -15,3 +15,12 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('post-detail',kwargs={'pk':self.pk})
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    content = models.TextField(max_length=200)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.post.title}-{self.user.username}'
