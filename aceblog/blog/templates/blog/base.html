@@ -17,7 +17,7 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
-        <div class="container"><a class="navbar-brand" href="index.html">ACE</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="container"><a class="navbar-brand" href="{% url 'blog-home' %}">ACE</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div
                 class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
@@ -33,24 +33,13 @@
         </div>
         </div>
     </nav>
-    <header class="masthead" style="background-image:url('assets/img/home-bg.jpg');">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-lg-8 mx-auto">
-                    <div class="site-heading">
-                        <h1>Student Corner</h1><span class="subheading">A Blog Theme by Start Bootstrap</span></div>
-                </div>
-            </div>
-        </div>
-    </header>
-    {% block content %}
-    {% endblock %}
+      {% block content %}
+      {% endblock %}
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto">
-                    <p class="text-muted copyright">Copyright&nbsp;©&nbsp;AceStudents 2018</p>
+                    <p class="text-muted copyright">This is unofficial and not affliated with aceec</p>
                 </div>
             </div>
         </div>
