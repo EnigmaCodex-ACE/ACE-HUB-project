@@ -1,14 +1,21 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <div class="media">
-          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-          <div class="media-body">
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
+    <header class="masthead" style="background-image:url('assets/img/contact-bg.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+                  <div class="site-heading">
+                      <h1>{{ user.username }}</h1><span class="subheading">{{ user.email }}</span></div>
+              </div>
           </div>
-        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+      <img class="rounded-circle" src="{{ user.profile.image.url }}">
         <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <fieldset class="form-group">
@@ -20,5 +27,5 @@
               <button class="btn btn-outline-info" type="submit">Update</button>
           </div>
       </form>
-      </div>
+    </div>
 {% endblock content %}
