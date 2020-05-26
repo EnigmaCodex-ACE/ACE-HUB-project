@@ -1,7 +1,4 @@
 {% load static %}
-
-<!---nevo-->
-
 <!DOCTYPE html>
 <html>
 
@@ -23,24 +20,40 @@
                 <ul class="nav navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'blog-home' %}">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'blog-about' %}">About</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'post-create' %}">New Post</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'profile' %}">{{ user }}</a></li>
                 {% else %}
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
-                {% endif %}
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'blog-home' %}">Home</a></li>
+                    {% endif %}
                 </ul>
         </div>
         </div>
     </nav>
-      {% block content %}
-      {% endblock %}
+    <header class="masthead" style="background-image:url('{% static 'blog/assets/img/about-bg.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>About</h1><span class="subheading">The nerds behind it</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <p>&lt;&lt; INSERT SHIT LATER HERE &gt;&gt;</p>
+            </div>
+        </div>
+    </div>
+    <hr>
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto">
-                    <p class="text-muted copyright">This is unofficial and not affliated with aceec</p>
+                    <p class="text-muted copyright">Copyright&nbsp;©&nbsp;AceStudents 2018</p>
                 </div>
             </div>
         </div>

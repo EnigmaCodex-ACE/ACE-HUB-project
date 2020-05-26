@@ -67,6 +67,7 @@ class UserPostListView(ListView):
                                                         'name':username})
     
 
-def about(request):
-    return render(request,'blog/about.html',{'title':"An About Page"})
+class AboutPageView(ListView):
+    model = User
+    template_name='blog/aboutpage.html'
 
