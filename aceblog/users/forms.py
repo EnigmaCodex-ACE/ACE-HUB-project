@@ -11,7 +11,7 @@ class UserRegisterForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ['username','email','password1','password2']
+        fields = ['username','first_name','email','password1','password2']
 
 class UserUpdateForm(forms.ModelForm):
     #helper = FormHelper()
@@ -27,9 +27,10 @@ class ProfileUpdateForm(forms.ModelForm):
     #helper.show_labels = False
     bio = forms.Textarea()
     image = forms.ImageField(required=False)
+    bg_img = forms.ImageField(required=False)
     class Meta:
         model = Profile 
-        fields = ['image','bio']
+        fields = ['image','bio','bg_img']
 
 class CollegeDatabaseForm(forms.ModelForm):
     class Meta:

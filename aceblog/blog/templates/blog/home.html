@@ -21,7 +21,7 @@
                 <a href="#">
                     <h2 class="post-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
                 </a>
-                <p class="post-meta">Posted by  {{ post.author }} on {{ post.date_posted|date:"F d , Y" }}</p>
+                <p class="post-meta">Posted by  <a href="{% url 'user-view' post.author %}">{{ post.author }}</a> on {{ post.date_posted|date:"F d , Y" }}</p>
               </div>
             <hr> 
             {% endfor %}

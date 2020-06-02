@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,reverse,redirect
 from django.http import HttpResponse
 from .models import Post,Comment
 from .forms import *
@@ -47,7 +47,7 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
 class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Post
-    success_url = '/'
+    success_url = '/students/'
     def test_func(self):
         post = self.get_object()
         if(self.request.user == post.author):
