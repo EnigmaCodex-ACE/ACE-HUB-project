@@ -21,7 +21,7 @@
                       <h2>You are about to delete {{object.title}}</h2>
                   </fieldset>
                   <div class="form-group">
-                      <button class="btn btn-outline-danger" type="submit">Delete</button>
+                      <button class="btn btn-outline-danger"  href="{% url 'blog-home' %}" type="submit">Delete</button>
                       <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}" type="submit">Cancel</a>
                   </div>
               </form>
