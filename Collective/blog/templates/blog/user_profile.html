@@ -1,0 +1,66 @@
+
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<header class="masthead" style="background-image:url('{{ user_profile.profile.bg_img.url }}');">
+      <div class="overlay"></div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+                  <div class="site-heading" style="padding-bottom: 30px; padding-top: 100px;">
+                    <img class="rounded-circle account-img"  style="width: 120px; height: 120px;" src="{{ user_profile.profile.image.url }}">
+                    <div>
+                          <h1>{{ name }}</h1><span class="subheading">{{ user_profile.email }}</span></div>
+                        <br>
+                          <div class="github-card" data-github="{{ githubusr }}" data-width=auto data-height="" data-theme="default"></div>
+                      <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+                    </div>
+              </div>
+          </div>
+      </div>
+    </header>
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto">
+          <h1 style="color:#616161">Entries Posted: </h1>
+          <br>
+          {% for comment in comments %}
+          <div class="post-preview" style="background-image:url('{{ comment.post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;padding-left: 30px;">
+            <br>
+            <a href="#">
+                  <h2 class="post-title"><a style="color:white;" href="{% url 'post-detail' comment.post.id %}">{{ comment.microtext }}</a></h2>
+              </a>
+              <p class="post-meta" style="color:white;">Posted to <b><a style="color:white;" href="{% url 'post-detail' comment.post.id %}">{{ comment.post.title }}</a> on {{ comment.created_date|date:"F d , Y" }}</b></p>
+              <br>
+            </div>
+          <br> 
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto">
+          <h1 style="color:#616161"> Challenges Posted: </h1>
+          <br>
+
+          {% for post in posts %}
+            <div class="post-preview" style="background-image:url('{{ post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;padding-left: 30px;">
+            <br>
+              <a href="#">
+                  <h2 class="post-title"><a style="color:white;" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+              </a>
+              <p class="post-meta" style="color:white;">Posted by  {{ post.author }} on {{ post.date_posted|date:"F d , Y" }}</p>
+              <br>
+            </div>
+            <br>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+<!--   view.kwargs.username -->

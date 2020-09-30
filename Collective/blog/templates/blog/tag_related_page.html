@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+      <header class="masthead" style="background-image:url('https://images.pexels.com/photos/1029611/pexels-photo-1029611.jpeg?cs=srgb&dl=abstract-abstract-photo-architectural-architectural-design-1029611.jpg&fm=jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1> Showing Challenges tagged #{{ tag }}</h1>
+                </div>
+            </div>
+        </div>
+      </header>
+      <div class="container" >
+        {% for post in posts %}
+        <div class="row" style="background-image:url('{{ post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;">
+          <div class="col-md-10 col-lg-8 mx-auto">
+            <br>
+            <div class="row" style="background-image:url('{{ post.postimg.url }}'); border-radius:15px; background-repeat: no-repeat; background-size: 100%; background-position: center;"></div>
+              <div class="post-preview">
+                <a href="#">
+                    <h2 class="post-title" style="color:#ffffff"><a style="color:#ffffff" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                </a>
+                <p class="post-meta" style="color:#ffffff">  Posted in <a style="color:#ffffff" href="{% url 'tag-view' post.tag %}"><i>#{{ post.tag }}</i></a> by <a style="color:#fffff" class = "post-meta" href="{% url 'user-view' post.author %}">{{ post.author }}</a> on {{ post.date_posted|date:"F d , Y" }}</p>
+              </div>
+            <hr> 
+          </div>
+        </div>
+        <br>
+            {% endfor %}
+
+      </div>
+{% endblock content %}
+
