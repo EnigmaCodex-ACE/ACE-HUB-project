@@ -1,0 +1,157 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #ffffff00;
+}
+
+/* The progress container (grey background) */
+.progress-container {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0);
+}
+
+/* The progress bar (scroll indicator) */
+.progress-bar {
+  height: 5px;
+  background: #839aff;
+  width: 0%;
+}
+
+.sidebar.affix{
+    position:fixed;
+    top:0;
+    right:0;
+}
+</style>
+
+<div class="header">
+  <div class="progress-bar" id="myBar"></div>
+</div>
+
+<script>
+  window.onscroll = function() {myFunction()};
+
+function myFunction() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+}
+
+var stickySidebar = $('.sidebar').offset();
+
+$(window).scroll(function() {  
+    if ($(window).scrollTop() > stickySidebar) {
+        $('.sidebar').addClass('affix');
+    }
+    else {
+        $('.sidebar').removeClass('affix');
+    }  
+});
+</script>
+
+<body>
+
+{% if post.postimg %}
+      <header class="masthead" style="background-image:url('{{ post.postimg.url }}');" data-adaptive-background data-ab-css-background>
+{% else %}
+      <header class="masthead" style="background-image:url('https://images.pexels.com/photos/1033177/pexels-photo-1033177.jpeg?cs=srgb&dl=white-and-gray-concrete-floor-1033177.jpg&fm=jpg');" data-adaptive-background data-ab-css-background>
+{% endif %}
+
+  <div class="overlay"></div>
+  <div class="container">
+      <div class="row data-ab-css-background">
+          <div class="col-md-10 col-lg-8 mx-auto">
+              <div class="site-heading">
+                  <h1>{{ post.title }}</h1>
+                  <p class="post-meta">Posted by  <a style="color:#ffffff" class = "post-meta text" href="{% url 'user-view' post.author %}">{{ post.author }}</a> on {{ post.date_posted|date:"F d , Y" }}</p>
+                  <hr>
+                  <p> {{ post.content }}</p>
+                  <br>
+                  <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'add_comment_to_post' pk=post.pk %}">Add your own entry</a>
+                  <br>
+          </div>
+      </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-auto">
+         <table>
+           <tr>
+             <th>
+              <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Total no of Entries {{ post.comments.all|length }}
+                </a>
+              </p>
+              <div class="collapse" id="collapseExample">
+                  {% for comment in post.comments.all %}
+                        <li style="list-style: none"><a class="btn btn-secondary" href="#scroll_{{ comment.id }}">{{ comment.microtext }} by u/{{ comment.author }}</a></li>
+                        <br>
+                  {% endfor %}
+              </div>
+             </th>
+           </tr>
+         </table>
+        <br>
+        <hr>
+        <br>
+        {% for comment in post.comments.all %}
+            <div id="scroll_{{ comment.id }}" class="comment">
+              <a href="{% url 'user-view' comment.author %}">
+              <div href="{% url 'user-view' comment.author %}" style="background-image:url('{{ comment.author.profile.bg_img.url }}');border-radius:15px;background-repeat: no-repeat;background-size: 100%;background-position: center;padding-left: 20px;padding-top: 25px;padding-bottom: -5; ">
+                <table style="margin-left: auto;
+                margin-right: auto; padding: 10px;">
+                  <tr>
+                    <th><img class="rounded-circle account-img"  style="width: 120px; height: 120px;" src="{{ comment.author.profile.image.url }}"></th>
+                    <th>  </th>
+                    <th style="padding: 20px;">
+                      <div>
+
+                        <h2 class='font-bold' style="color:#ffffff">"{{ comment.microtext }}" </h2>
+                        <div style="color:#ffffff" class="post-meta"> Added by <i><u>{{ comment.author }}</u></i> on {{ comment.created_date }}</div>
+                      </div>
+                    </th>
+                  </tr>
+                </table>
+              </a>
+                <br>
+              </div>
+                {% if comment.author == user %}
+                <a class="btn btn-disabled btn-sm mt-1 mb-1">Editing comming soon</a>
+                {% endif %}
+                <br>
+                <div>
+                  <div class="github-card" data-github="{{comment.githubrepo}}" data-width="400" data-height="" data-theme="default"></div>
+                  <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+                </div>
+                <p>{{ comment.text|safe }}</p>
+                {% if comment.commentimg %}
+                <div><img src={{ comment.commentimg.url }} width=75% height=auto></div>
+                {% endif %}
+                <br>
+                <hr>
+                <br>
+            </div>
+        {% empty %}
+            <h1> Looks empty to me? You wanna try?</h1>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+      <script src="{% static 'blog/assets/js/jquery.min.js' %}"></script>
+      <script src="{% static 'blog/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'blog/assets/js/script.min.js' %}"></script>
+  </body>
+  
+  </html>
+  {% endblock content %}
