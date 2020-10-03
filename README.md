@@ -1,2 +1,6 @@
 # CollectiveEnigmaProject
-Personal-ish blog for posting blogs :)
+
+Students feed for ACE Engineering College.
+
+## Live demo
+[here](http://vonneumannscientia.pythonanywhere.com/)
