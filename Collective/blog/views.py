@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     context = {
         'posts': Post.objects.all() ,
-        'title':"ACE Students",
+        'title':"ACE HUB project",
         'user':User.objects.all()
     }
     return render(request,'blog/home.html',context)
